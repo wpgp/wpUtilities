@@ -2,6 +2,7 @@
 
 export(wpGetBlocksNeed)
 export(wpProgressMessage)
+export(wpRasterStackCalc)
 export(wpRasterize)
 export(wpTimeDiff)
 export(wpZonalStatistics)
