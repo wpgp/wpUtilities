@@ -16,7 +16,7 @@
 #' @examples
 #' wpGetBlocksNeed( x, cores=2, n=1 )
 #'
-wpGetBlocksNeed <- function(x, cores, n=1, number_type = "numeric"){
+wpGetBlocksNeed <- function( x, cores, n=1, number_type = "numeric"){
 
   #stopifnot(hasValues(x))
 
