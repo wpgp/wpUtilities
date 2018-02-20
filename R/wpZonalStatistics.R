@@ -76,7 +76,7 @@ wpZonalStatistics <- function(x, y, fun='mean', cores=NULL, minblk=NULL, na.rm=T
 
     if ( fun == 'mean' | fun == 'sd' ) {
 
-      df.fun <- aggregate(x = (df.x), by = list(df.y[,1]), FUN = 'sum', na.rm=na.rm)
+      df.fun <- aggregate(x = (df.x), by = list(df.y[,1]), FUN = function(x, na.rm = TRUE) sum(as.numeric(x), na.rm = na.rm), na.rm=na.rm)
       df.length <- aggregate(x = (df.x), by = list(df.y[,1]), FUN = function(x, na.rm=na.rm) length(stats::na.omit(x)), na.rm=na.rm)
 
       colnames(df.length) <- c(layernames,'length')
@@ -86,7 +86,7 @@ wpZonalStatistics <- function(x, y, fun='mean', cores=NULL, minblk=NULL, na.rm=T
       
       if (fun == 'sd'){
         
-        df.sq <- aggregate(x = (df.x^2), by = list(df.y[,1]), FUN='sum', na.rm=na.rm)
+        df.sq <- aggregate(x = (df.x^2), by = list(df.y[,1]), FUN = function(x, na.rm = TRUE) sum(as.numeric(x), na.rm = na.rm), na.rm=na.rm)
         colnames(df.sq) <- c(layernames,'sq')
         df <- merge(df, df.sq, all=TRUE, by=layernames)
         
@@ -100,7 +100,7 @@ wpZonalStatistics <- function(x, y, fun='mean', cores=NULL, minblk=NULL, na.rm=T
       
     } else if ( fun == 'sum') {
       
-      df <- aggregate(x = (df.x), by = list(df.y[,1]), FUN = function(x, na.rm = TRUE) sum(as.numeric(x)), na.rm=na.rm)
+      df <- aggregate(x = (df.x), by = list(df.y[,1]), FUN = function(x, na.rm = TRUE) sum(as.numeric(x), na.rm = na.rm), na.rm=na.rm)
       
       colnames(df) <- c(layernames,'sum')	
     
@@ -143,7 +143,7 @@ wpZonalStatistics <- function(x, y, fun='mean', cores=NULL, minblk=NULL, na.rm=T
     
   } else if ( fun == 'sum') {
     
-    df1 <- aggregate(x = result[[2]], by = list(result[[1]]), FUN = function(x, na.rm = TRUE) sum(as.numeric(x)), na.rm=na.rm)
+    df1 <- aggregate(x = result[[2]], by = list(result[[1]]), FUN = function(x, na.rm = TRUE) sum(as.numeric(x), na.rm = na.rm), na.rm=na.rm)
     
     colnames(df1) <- c(layernames,'sum')	
     
